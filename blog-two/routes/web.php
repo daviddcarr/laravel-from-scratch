@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PostsController@index');
+Route::get('/posts/{post}', 'PostsController@show');
+
+
+// PostsController => PostsController
+
+// Eloquent Model => Post
+
+// migration => create_posts_table
