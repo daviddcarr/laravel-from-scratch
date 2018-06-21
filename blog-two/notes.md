@@ -10,3 +10,18 @@
 // We can do all three at once with the following command:
 `php artisan make:model Post -mc`
 (-mc or --migration --controller creates both in addition to the model)
+
+
+GET /posts
+
+GET /posts/create
+
+POST /posts
+
+GET /posts/{id}/edit
+
+GET /posts/{id}
+
+PATCH /posts/{id}
+
+DELETE /posts/{id}
