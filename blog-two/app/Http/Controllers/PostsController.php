@@ -50,6 +50,11 @@ class PostsController extends Controller
         //     'body' => request('body')
         // ]);
 
+        $this->validate(request(), [
+            'title' => 'required|max:100',
+            'body' => 'required'
+        ]);
+
         Post::create(request(['title', 'body']));
 
         // redirect to the home page
