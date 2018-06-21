@@ -2,6 +2,8 @@
 
 @section('content')
 
-    <h1>A Place to show the post</h1>
+    <div class="col-sm-8 blog-main">
+        @include('posts.post')
+    </div>
 
 @endsection
