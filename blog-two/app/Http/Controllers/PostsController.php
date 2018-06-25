@@ -8,6 +8,11 @@ use App\Post;
 
 class PostsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     public function index()
     {
         $posts = Post::latest()->get();
@@ -27,37 +32,21 @@ class PostsController extends Controller
 
     public function store()
     {
-        // dd() = Die and Dump, dumps data onto page.
-
-        //dd(request()->all());
-        //dd(request('body'));
-        //dd(request(['title', 'body']));
-
-
-        // // Create a new post using the request data
-        //
-        // $post = new Post;
-        //
-        //
-        // $post->title = request('title');
-        //
-        // $post->body = request('body');
-        //
-        // // save it to the DB
-        //
-        // $post->save();
-
-        // Post::create([
-        //     'title' => request('title'),
-        //     'body' => request('body')
-        // ]);
-
         $this->validate(request(), [
             'title' => 'required|max:100',
             'body' => 'required'
         ]);
 
-        Post::create(request(['title', 'body']));
+        //Post::create(request(['title', 'body']));
+        // Post::create([
+        //     'title' => request('title'),
+        //     'body' => request('body'),
+        //     'user_id' => auth()->id()
+        // ]);
+
+        auth()->user()->publish(
+            new Post(request(['title', 'body']))
+        );
 
         // redirect to the home page
 

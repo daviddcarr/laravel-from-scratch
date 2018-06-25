@@ -25,3 +25,7 @@ GET /posts/{id}
 PATCH /posts/{id}
 
 DELETE /posts/{id}
+
+
+`bcrypt('{password}');`
+Encrypts Password in PHP

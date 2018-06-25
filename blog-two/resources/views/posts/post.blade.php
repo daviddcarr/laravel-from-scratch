@@ -10,7 +10,7 @@
     @else
         comments
     @endif
-    </p>
+    | By {{ $post->user->name }}</p>
 
     {{ $post->body }}
 
