@@ -20,4 +20,18 @@ class Post extends Model
     //protected $guarded = ['user_id'];
 
     // Made obsolete by the Model.php controller we created
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+    public function addComment($body)
+    {
+        $this->comments()->create(compact('body'));
+
+        // Comment::create([
+        //     'body' => request('body'),
+        //     'post_id' => $this->id
+        // ]);
+    }
 }

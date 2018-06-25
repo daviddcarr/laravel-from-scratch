@@ -20,6 +20,7 @@ Route::get('/posts/{post}', 'PostsController@show');
 
 Route::post('/posts', 'PostsController@store');
 
+Route::post('/posts/{post}/comments', 'CommentsController@store');
 
 // PostsController => PostsController
 

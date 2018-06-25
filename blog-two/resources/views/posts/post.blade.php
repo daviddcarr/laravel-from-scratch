@@ -4,7 +4,13 @@
             {{ $post->title }}
         </a>
     </h2>
-    <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }}</p>
+    <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} | {{ $post->comments->count() }}
+    @if ($post->comments->count() == 1)
+        comment
+    @else
+        comments
+    @endif
+    </p>
 
     {{ $post->body }}
 
