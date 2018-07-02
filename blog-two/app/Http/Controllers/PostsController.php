@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Post;
 
+//Use for date/time conversions and whatnot.
+use Carbon\Carbon;
+
 class PostsController extends Controller
 {
     public function __construct()
@@ -15,10 +18,27 @@ class PostsController extends Controller
 
     public function index()
     {
-        $posts = Post::latest()->get();
+        // $posts = Post::latest()->get();
+        $posts = Post::latest()
+            ->filter(request(['month', 'year']))
+            ->get();
 
+        // if ($month = request('month')) {
+        //     $posts->whereMonth('created_at', Carbon::parse($month)->month);
+        // }
+        // if ($year = request('year')) {
+        //     $posts->whereYear('created_at', $year);
+        // }
+        //
+        // $posts = $posts->get();
 
-        return view('posts.index', compact('posts'));
+        $archives = Post::selectRaw('year(created_at) year, monthname(created_at) month, count(*) published')
+            ->groupBy('year', 'month')
+            ->orderByRaw('min(created_at) desc')
+            ->get()
+            ->toArray();
+
+        return view('posts.index', compact('posts', 'archives'));
     }
 
     public function show(Post $post)

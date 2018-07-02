@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Carbon\Carbon;
+
 // Use our custom Model class rather than Eloquent's
 // use Illuminate\Database\Eloquent\Model;
 
@@ -37,5 +39,14 @@ class Post extends Model
         //     'body' => request('body'),
         //     'post_id' => $this->id
         // ]);
+    }
+    public function scopeFilter($query, $filters)
+    {
+        if ($month = $filters['month'] ?? false) {
+            $query->whereMonth('created_at', Carbon::parse($month)->month);
+        }
+        if ($year = $filters['year'] ?? false) {
+            $query->whereYear('created_at', $year);
+        }
     }
 }
