@@ -38,6 +38,6 @@ class User extends Authenticatable
 
     public function publish(Post $post)
     {
-        $this->posts()->save(Post::class);
+        $this->posts()->save($post);
     }
 }

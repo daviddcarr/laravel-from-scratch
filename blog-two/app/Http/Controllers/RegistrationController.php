@@ -28,7 +28,15 @@ class RegistrationController extends Controller
         ]);
 
         // Create and save the user.
-        $user = User::create(request(['name', 'email', 'password']));
+
+        // This bit that the tutorial included is wrong. Password needs to be encrypted. Sessions controller authenticator automatically encrypts when verifying a password.
+        //$user = User::create(request(['name', 'email', 'password']));
+
+        $user = User::create([
+            'name' => request('name'),
+            'email' => request('email'),
+            'password' => bcrypt(request('password'))
+        ]);
 
         // Sign them in.
         auth()->login($user);
