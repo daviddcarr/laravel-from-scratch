@@ -13,7 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Anywhere sidebar is loaded in the view. Add a variable named archives and set it equal to the data extracted from the Post::archives() function.
+        view()->composer('layouts.sidebar', function($view) {
+            $view->with('archives', \App\Post::archives());
+        });
     }
 
     /**

@@ -25,14 +25,6 @@ class SessionsController extends Controller
                 'message' => 'Please check your credentials and try again.'
             ]);
         }
-
-        // If not, redirect back.
-
-
-        // If so, sign them in.
-        //auth()->login($user);
-
-        // Redirect to the home page.
         return redirect()->home();
     }
 
